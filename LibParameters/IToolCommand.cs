@@ -3,7 +3,6 @@
 public interface IToolCommand
 {
     IParameters Par { get; }
-
-    //ParametersEditor GetParametersEditor();
+    string Description { get; }
     bool Run();
 }
