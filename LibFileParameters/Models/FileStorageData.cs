@@ -11,6 +11,8 @@ public sealed class FileStorageData : ItemData
     public string? Password { get; set; }
     public int FileNameMaxLength { get; set; }
     public int FileSizeSplitPositionInRow { get; set; }
+    public int FtpSiteLsFileOffset { get; set; }
+
 
     //public bool IsSameToLocal(string localPath)
     //{
