@@ -1,6 +1,7 @@
 ﻿using System;
 using LibParameters;
 using SystemToolsShared;
+using WebAgentMessagesContracts;
 
 namespace LibFileParameters.Models;
 
@@ -38,20 +39,26 @@ public sealed class FileStorageData : ItemData
         return uri.Scheme.ToLower() == "ftp";
     }
 
-    public static bool IsSameToLocal(FileStorageData forFileStorage, string localPath)
+    public static bool IsSameToLocal(FileStorageData forFileStorage, string localPath,
+        IMessagesDataManager? messagesDataManager, string? userName)
     {
+        var fileStoragePath = forFileStorage.FileStoragePath;
         //ან თუ წყაროს ფაილსაცავი ლოკალურია და მისი ფოლდერი ემთხვევა პარამეტრების ლოკალურ ფოლდერს.
         //   მაშინ მოქაჩვა საჭირო აღარ არის
-        if (forFileStorage.FileStoragePath is null || string.IsNullOrWhiteSpace(localPath))
+        if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath))
         {
+            messagesDataManager?.SendMessage(userName,
+                "IsSameToLocal Returns false because forFileStorage is null or localPath empty ").Wait();
             Console.WriteLine("IsSameToLocal Returns false because forFileStorage is null or localPath empty ");
             return false;
         }
 
-        if (FileStat.IsFileSchema(forFileStorage.FileStoragePath))
-            return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(forFileStorage.FileStoragePath);
+        if (FileStat.IsFileSchema(fileStoragePath))
+            return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(fileStoragePath);
 
-        Console.WriteLine($"IsSameToLocal Returns true because {forFileStorage.FileStoragePath} is not file schema");
+        messagesDataManager
+            ?.SendMessage(userName, $"IsSameToLocal Returns true because {fileStoragePath} is not file schema").Wait();
+        Console.WriteLine($"IsSameToLocal Returns true because {fileStoragePath} is not file schema", fileStoragePath);
         return false;
     }
 }
