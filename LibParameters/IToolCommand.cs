@@ -3,6 +3,6 @@
 public interface IToolCommand
 {
     IParameters Par { get; }
-    string Description { get; }
+    string? Description { get; }
     bool Run();
 }
