@@ -25,15 +25,19 @@ public sealed class FileStorageData : ItemData
     //  return FileStat.NormalizePath(localPath) != FileStat.NormalizePath(FileStoragePath);
     //}
 
-    public bool IsFileSchema()
+    public bool? IsFileSchema()
     {
         if (string.IsNullOrWhiteSpace(FileStoragePath))
-            throw new Exception("FileStoragePath is empty");
+            //throw new Exception("FileStoragePath is empty");
+            return null;
         return FileStat.IsFileSchema(FileStoragePath);
     }
 
-    public bool IsFtp()
+    public bool? IsFtp()
     {
+        if (string.IsNullOrWhiteSpace(FileStoragePath))
+            //throw new Exception("FileStoragePath is empty");
+            return null;
         if (!Uri.TryCreate(FileStoragePath, UriKind.Absolute, out var uri))
             return false;
         return uri.Scheme.ToLower() == "ftp";
