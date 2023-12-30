@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using LibParameters;
 using SystemToolsShared;
 
@@ -49,19 +48,11 @@ public sealed class FileStorageData : ItemData
         //   მაშინ მოქაჩვა საჭირო აღარ არის
         if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath))
         {
-            //messagesDataManager?.SendMessage(userName,
-            //    "IsSameToLocal Returns false because forFileStorage is null or localPath empty ",
-            //    CancellationToken.None).Wait();
-            //Console.WriteLine("IsSameToLocal Returns false because forFileStorage is null or localPath empty ");
             return false;
         }
 
         if (FileStat.IsFileSchema(fileStoragePath))
             return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(fileStoragePath);
-
-        //messagesDataManager?.SendMessage(userName,
-        //    $"IsSameToLocal Returns true because {fileStoragePath} is not file schema", CancellationToken.None).Wait();
-        //Console.WriteLine($"IsSameToLocal Returns true because {fileStoragePath} is not file schema", fileStoragePath);
         return false;
     }
 }
