@@ -1,8 +1,11 @@
-﻿namespace LibParameters;
+﻿using System.Threading.Tasks;
+using System.Threading;
+
+namespace LibParameters;
 
 public interface IToolCommand
 {
     IParameters Par { get; }
     string? Description { get; }
-    bool Run();
+    Task<bool> Run(CancellationToken cancellationToken);
 }
