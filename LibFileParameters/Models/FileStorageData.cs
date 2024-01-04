@@ -46,10 +46,7 @@ public sealed class FileStorageData : ItemData
         var fileStoragePath = forFileStorage.FileStoragePath;
         //ან თუ წყაროს ფაილსაცავი ლოკალურია და მისი ფოლდერი ემთხვევა პარამეტრების ლოკალურ ფოლდერს.
         //   მაშინ მოქაჩვა საჭირო აღარ არის
-        if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath))
-        {
-            return false;
-        }
+        if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath)) return false;
 
         if (FileStat.IsFileSchema(fileStoragePath))
             return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(fileStoragePath);
