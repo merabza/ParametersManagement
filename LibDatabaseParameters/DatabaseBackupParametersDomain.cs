@@ -6,6 +6,7 @@ namespace LibDatabaseParameters;
 
 public sealed class DatabaseBackupParametersDomain : IParameters
 {
+    // ReSharper disable once ConvertToPrimaryConstructor
     public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
         string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType, //string? dbServerName,
         string? dbServerSideBackupPath)
