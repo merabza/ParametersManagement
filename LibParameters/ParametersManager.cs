@@ -9,6 +9,7 @@ public sealed class ParametersManager : IParametersManager
 {
     private readonly string? _encKey;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public ParametersManager(string? parametersFileName, IParameters parameters, string? encKey = null)
     {
         ParametersFileName = parametersFileName;
