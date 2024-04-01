@@ -9,6 +9,7 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
 {
     private readonly string? _encKey;
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public ParametersLoader(string? encKey = null)
     {
         _encKey = encKey;
