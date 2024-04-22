@@ -7,7 +7,8 @@ namespace LibDatabaseParameters;
 public sealed class DatabaseBackupParametersDomain : IParameters
 {
     // ReSharper disable once ConvertToPrimaryConstructor
-    private DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
+    //public გამოიყენება WebAgent-ში
+    public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
         string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType, string? dbServerSideBackupPath)
     {
         BackupNamePrefix = backupNamePrefix;
