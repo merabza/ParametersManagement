@@ -7,9 +7,8 @@ namespace LibDatabaseParameters;
 public sealed class DatabaseBackupParametersDomain : IParameters
 {
     // ReSharper disable once ConvertToPrimaryConstructor
-    public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
-        string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType, //string? dbServerName,
-        string? dbServerSideBackupPath)
+    private DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
+        string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType, string? dbServerSideBackupPath)
     {
         BackupNamePrefix = backupNamePrefix;
         DateMask = dateMask;
@@ -18,7 +17,6 @@ public sealed class DatabaseBackupParametersDomain : IParameters
         Compress = compress;
         Verify = verify;
         BackupType = backupType;
-        //DbServerName = dbServerName;
         DbServerSideBackupPath = dbServerSideBackupPath;
     }
 
@@ -31,8 +29,6 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     public bool Verify { get; }
     public EBackupType BackupType { get; }
 
-    //public string? DbServerName { get; }
-
     public string? DbServerSideBackupPath { get; }
 
     public bool CheckBeforeSave()
@@ -41,7 +37,6 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     }
 
     public static DatabaseBackupParametersDomain? Create(DatabaseBackupParametersModel? dbBackupParameters,
-        //string? dbServerName, 
         string? dbServerSideBackupPath)
     {
         if (dbBackupParameters is null)
