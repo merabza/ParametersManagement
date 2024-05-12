@@ -8,24 +8,25 @@ namespace LibParameters;
 public sealed class ParametersManager : IParametersManager
 {
     private readonly string? _encKey;
-    private string? _parametersFileName;
 
     private string? _paramsJsonText;
 
     // ReSharper disable once ConvertToPrimaryConstructor
     public ParametersManager(string? parametersFileName, IParameters parameters, string? encKey = null)
     {
-        _parametersFileName = parametersFileName;
+        ParametersFileName = parametersFileName;
         _encKey = encKey;
         Parameters = parameters;
     }
+
+    public string? ParametersFileName { get; private set; }
 
     public IParameters Parameters { get; set; }
 
     public void Save(IParameters parameters, string message, string? saveAsFilePath = null)
     {
         if (!string.IsNullOrWhiteSpace(saveAsFilePath))
-            _parametersFileName = saveAsFilePath;
+            ParametersFileName = saveAsFilePath;
 
         if (!parameters.CheckBeforeSave())
             StShared.WriteWarningLine("Something wrong with data for save", true, null, true);
@@ -37,7 +38,7 @@ public sealed class ParametersManager : IParametersManager
         if (_encKey != null)
             _paramsJsonText = EncryptDecrypt.EncryptString(_paramsJsonText, _encKey);
 
-        var filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : _parametersFileName;
+        var filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : ParametersFileName;
 
         //FIXME მიმდინარე ფაილის შეცვლამდე უნდა მოხდეს ბექაპის დამახსოვრება
         //დავადგინოთ შესანახი ფაილის სახელის მიხედვით არსებობს თუ არა ფაილი.
