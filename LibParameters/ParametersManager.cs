@@ -8,6 +8,9 @@ namespace LibParameters;
 public sealed class ParametersManager : IParametersManager
 {
     private readonly string? _encKey;
+    private string? _parametersFileName;
+
+    private string? _paramsJsonText;
 
     // ReSharper disable once ConvertToPrimaryConstructor
     public ParametersManager(string? parametersFileName, IParameters parameters, string? encKey = null)
@@ -17,8 +20,6 @@ public sealed class ParametersManager : IParametersManager
         Parameters = parameters;
     }
 
-    private string? _paramsJsonText;
-    private string? _parametersFileName;
     public IParameters Parameters { get; set; }
 
     public void Save(IParameters parameters, string message, string? saveAsFilePath = null)
