@@ -12,39 +12,31 @@ public sealed class ParametersManager : IParametersManager
     // ReSharper disable once ConvertToPrimaryConstructor
     public ParametersManager(string? parametersFileName, IParameters parameters, string? encKey = null)
     {
-        ParametersFileName = parametersFileName;
+        _parametersFileName = parametersFileName;
         _encKey = encKey;
         Parameters = parameters;
     }
 
-    //public ParametersManager(IParameters parameters, string? encKey = null)
-    //{
-    //    ParametersFileName = null;
-    //    _encKey = encKey;
-    //    Parameters = parameters;
-    //}
-
-    public string? ParamsJsonText { get; set; }
-    public string? ParametersFileName { get; set; }
+    private string? _paramsJsonText;
+    private string? _parametersFileName;
     public IParameters Parameters { get; set; }
 
-    public void Save(IParameters parameters, string message, bool pauseAfterMessage = true,
-        string? saveAsFilePath = null)
+    public void Save(IParameters parameters, string message, string? saveAsFilePath = null)
     {
         if (!string.IsNullOrWhiteSpace(saveAsFilePath))
-            ParametersFileName = saveAsFilePath;
+            _parametersFileName = saveAsFilePath;
 
         if (!parameters.CheckBeforeSave())
             StShared.WriteWarningLine("Something wrong with data for save", true, null, true);
 
-        ParamsJsonText = JsonConvert.SerializeObject(parameters, Formatting.Indented);
+        _paramsJsonText = JsonConvert.SerializeObject(parameters, Formatting.Indented);
 
         //იშიფრება მთლიანი json ტექსტი. ამის გამო შეუძლებელია მანქანებს შორის სეთინგების გადატანა
         //FIXME შესაბამისად შესაძლებელი უნდა იყოს გაშიფრული ვარიანტის შენახვა
         if (_encKey != null)
-            ParamsJsonText = EncryptDecrypt.EncryptString(ParamsJsonText, _encKey);
+            _paramsJsonText = EncryptDecrypt.EncryptString(_paramsJsonText, _encKey);
 
-        var filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : ParametersFileName;
+        var filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : _parametersFileName;
 
         //FIXME მიმდინარე ფაილის შეცვლამდე უნდა მოხდეს ბექაპის დამახსოვრება
         //დავადგინოთ შესანახი ფაილის სახელის მიხედვით არსებობს თუ არა ფაილი.
@@ -54,7 +46,7 @@ public sealed class ParametersManager : IParametersManager
         if (string.IsNullOrWhiteSpace(filePathForSave)) throw new Exception("filePathForSave is empty, cannot save");
 
         //შევინახოთ პარამეტრების ფაილი
-        File.WriteAllText(filePathForSave, ParamsJsonText);
+        File.WriteAllText(filePathForSave, _paramsJsonText);
 
         //დავადგინოთ არსებობს თუ არა ძალიან ძველი bak ფაილები და წავშალოთ
 
@@ -62,8 +54,7 @@ public sealed class ParametersManager : IParametersManager
         Parameters = parameters;
         if (string.IsNullOrWhiteSpace(message))
             return;
+
         StShared.WriteSuccessMessage(message);
-        if (pauseAfterMessage)
-            StShared.Pause();
     }
 }
