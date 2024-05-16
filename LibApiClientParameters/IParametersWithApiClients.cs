@@ -5,5 +5,5 @@ namespace LibApiClientParameters;
 
 public interface IParametersWithApiClients : IParameters
 {
-    public Dictionary<string, ApiClientSettings> ApiClients { get; }
+    Dictionary<string, ApiClientSettings> ApiClients { get; }
 }
