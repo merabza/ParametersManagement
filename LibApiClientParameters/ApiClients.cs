@@ -8,6 +8,7 @@ public sealed class ApiClients
     private readonly Dictionary<string, ApiClientSettings> _apiClientSettings;
 
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public ApiClients(Dictionary<string, ApiClientSettings> apiClients)
     {
         _apiClientSettings = apiClients;
@@ -22,6 +23,6 @@ public sealed class ApiClients
 
     public ApiClientSettings? GetApiClientByKey(string key)
     {
-        return _apiClientSettings.TryGetValue(key, out var value) ? value : null;
+        return _apiClientSettings.GetValueOrDefault(key);
     }
 }
