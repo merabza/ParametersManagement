@@ -18,7 +18,7 @@ public sealed class ApiClients
     {
         var apiClientSettings = configuration.GetSection(sectionName);
         var apiClients = apiClientSettings.Get<Dictionary<string, ApiClientSettings>>();
-        return new ApiClients(apiClients ?? new Dictionary<string, ApiClientSettings>());
+        return new ApiClients(apiClients ?? []);
     }
 
     public ApiClientSettings? GetApiClientByKey(string key)
