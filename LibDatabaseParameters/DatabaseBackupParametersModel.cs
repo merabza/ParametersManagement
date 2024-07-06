@@ -28,6 +28,6 @@ public sealed class DatabaseBackupParametersModel : IParameters
 
     public string GetSuffix()
     {
-        return (BackupFileExtension ?? "").AddNeedLeadPart(".");
+        return (BackupFileExtension ?? string.Empty).AddNeedLeadPart(".");
     }
 }
