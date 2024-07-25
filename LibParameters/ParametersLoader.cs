@@ -19,7 +19,7 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
     public string? ParametersFileName { get; set; }
 
 
-    public bool TryLoadParameters(string paramsFileName)
+    public bool TryLoadParameters(string paramsFileName, bool shoWError = true)
     {
         Par = null;
         try
@@ -49,7 +49,8 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
         }
         catch (Exception e)
         {
-            StShared.WriteException(e, true);
+            if (shoWError)
+                StShared.WriteException(e, true);
         }
 
         return false;
