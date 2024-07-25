@@ -23,7 +23,7 @@ public sealed class ParametersManager : IParametersManager
 
     public IParameters Parameters { get; set; }
 
-    public void Save(IParameters parameters, string message, string? saveAsFilePath = null)
+    public void Save(IParameters parameters, string? message = null, string? saveAsFilePath = null)
     {
         if (!string.IsNullOrWhiteSpace(saveAsFilePath))
             ParametersFileName = saveAsFilePath;
