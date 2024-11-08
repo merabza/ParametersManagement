@@ -9,12 +9,12 @@ namespace LibFileParameters.Models;
 public sealed class SmartSchema : ItemData
 {
     public int LastPreserveCount { get; init; }
-    public List<SmartSchemaDetail> Details { get; init; } = new();
+    public List<SmartSchemaDetail> Details { get; init; } = [];
 
     public List<DateTime> GetPreserveFileDates(List<BuFileInfo> files)
     {
         if (Details.Count < 1)
-            return new List<DateTime>();
+            return [];
 
         //თავიდან ბოლო შექმნილები დავარეზერვოთ
         var preserveDates = files.Select(s => s.FileDateTime).OrderByDescending(obd => obd)
@@ -24,7 +24,7 @@ public sealed class SmartSchema : ItemData
         var minPeriodType = Details.Max(m => m.PeriodType);
         var minPeriodSmartSchemaDetail = Details.SingleOrDefault(s => s.PeriodType == minPeriodType);
         if (minPeriodSmartSchemaDetail == null)
-            return new List<DateTime>();
+            return [];
 
         //ყველაზე პატარა დეტალისათვის გადავინახოთ PreserveCount რაოდენობის ფაილი
         preserveDates.AddRange(files.Select(s => s.FileDateTime).OrderByDescending(od => od)

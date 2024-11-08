@@ -8,6 +8,7 @@ public sealed class Archivers
     private readonly Dictionary<string, ArchiverData> _archivers;
 
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public Archivers(Dictionary<string, ArchiverData> archivers)
     {
         _archivers = archivers;

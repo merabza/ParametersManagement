@@ -13,6 +13,7 @@ public sealed class SmartSchemas
     //    return new SmartSchemas(smartSchemas);
     //}
 
+    // ReSharper disable once ConvertToPrimaryConstructor
     public SmartSchemas(Dictionary<string, SmartSchema> smartSchemas)
     {
         _smartSchemas = smartSchemas;

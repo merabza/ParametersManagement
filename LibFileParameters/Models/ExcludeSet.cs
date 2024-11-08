@@ -8,7 +8,7 @@ namespace LibFileParameters.Models;
 public sealed class ExcludeSet : ItemData
 {
     //გამონაკლისების სია
-    public List<string> FolderFileMasks { get; set; } = new();
+    public List<string> FolderFileMasks { get; set; } = [];
 
     public bool NeedExclude(string name)
     {
