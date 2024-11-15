@@ -25,6 +25,6 @@ public sealed class DatabaseServerConnections
 
     public DatabaseServerConnectionData? GetDatabaseServerConnectionByKey(string key)
     {
-        return _databaseServerConnections.TryGetValue(key, out var value) ? value : null;
+        return _databaseServerConnections.GetValueOrDefault(key);
     }
 }
