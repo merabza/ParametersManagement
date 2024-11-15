@@ -13,4 +13,5 @@ public sealed class DatabaseServerConnectionData : ItemData
     public string? BackupFolderName { get; set; }
     public string? DataFolderName { get; set; }
     public string? DataLogFolderName { get; set; }
+    public bool TrustServerCertificate { get; set; }
 }
