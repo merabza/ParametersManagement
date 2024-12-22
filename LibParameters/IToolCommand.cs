@@ -7,5 +7,5 @@ public interface IToolCommand
 {
     IParameters Par { get; }
     string? Description { get; }
-    Task<bool> Run(CancellationToken cancellationToken = default);
+    ValueTask<bool> Run(CancellationToken cancellationToken = default);
 }
