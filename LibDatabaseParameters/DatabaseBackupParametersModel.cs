@@ -4,7 +4,7 @@ using SystemToolsShared;
 
 namespace LibDatabaseParameters;
 
-public sealed class DatabaseBackupParametersModel : IParameters
+public sealed class DatabaseBackupParametersModel : ParametersWithStatus
 {
     public string? BackupNamePrefix { get; set; }
     public string? DateMask { get; set; }
@@ -14,12 +14,6 @@ public sealed class DatabaseBackupParametersModel : IParameters
     public bool Compress { get; set; }
     public bool Verify { get; set; }
     public EBackupType BackupType { get; set; }
-
-    public bool CheckBeforeSave()
-    {
-        return true;
-    }
-
 
     public string GetPrefix(string databaseName)
     {
