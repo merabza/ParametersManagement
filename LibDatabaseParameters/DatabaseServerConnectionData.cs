@@ -16,5 +16,4 @@ public sealed class DatabaseServerConnectionData : ItemData
     public bool TrustServerCertificate { get; set; }
     public int ConnectionTimeOut { get; set; }
     public bool Encrypt { get; set; }
-
 }
