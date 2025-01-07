@@ -8,8 +8,9 @@ public sealed class DatabaseBackupParametersDomain : IParameters
 {
     // ReSharper disable once ConvertToPrimaryConstructor
     //public გამოიყენება WebAgent-ში
+    //, string? dbServerSideBackupPath
     public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
-        string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType, string? dbServerSideBackupPath)
+        string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType)
     {
         BackupNamePrefix = backupNamePrefix;
         DateMask = dateMask;
@@ -18,7 +19,7 @@ public sealed class DatabaseBackupParametersDomain : IParameters
         Compress = compress;
         Verify = verify;
         BackupType = backupType;
-        DbServerSideBackupPath = dbServerSideBackupPath;
+        //DbServerSideBackupPath = dbServerSideBackupPath;
     }
 
     public string BackupNamePrefix { get; }
@@ -30,15 +31,15 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     public bool Verify { get; }
     public EBackupType BackupType { get; }
 
-    public string? DbServerSideBackupPath { get; }
+    //public string? DbServerSideBackupPath { get; }
 
     public bool CheckBeforeSave()
     {
         return true;
     }
 
-    public static DatabaseBackupParametersDomain? Create(DatabaseBackupParametersModel? dbBackupParameters,
-        string? dbServerSideBackupPath)
+    //string? dbServerSideBackupPath
+    public static DatabaseBackupParametersDomain? Create(DatabaseBackupParametersModel? dbBackupParameters)
     {
         if (dbBackupParameters is null)
         {
@@ -67,8 +68,10 @@ public sealed class DatabaseBackupParametersDomain : IParameters
         return new DatabaseBackupParametersDomain(dbBackupParameters.BackupNamePrefix,
             string.IsNullOrWhiteSpace(dbBackupParameters.DateMask) ? "yyyyMMddHHmmss" : dbBackupParameters.DateMask,
             dbBackupParameters.BackupFileExtension, dbBackupParameters.BackupNameMiddlePart,
-            dbBackupParameters.Compress, dbBackupParameters.Verify, dbBackupParameters.BackupType, //dbServerName,
-            dbServerSideBackupPath);
+            dbBackupParameters.Compress, dbBackupParameters.Verify, dbBackupParameters.BackupType
+            //, //dbServerName,
+            //dbServerSideBackupPath
+            );
     }
 
     public string GetPrefix(string databaseName)
