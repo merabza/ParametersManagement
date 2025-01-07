@@ -1,4 +1,5 @@
-﻿using DbTools;
+﻿using System;
+using DbTools;
 using LibParameters;
 using SystemToolsShared;
 
@@ -39,40 +40,24 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     }
 
     //string? dbServerSideBackupPath
-    public static DatabaseBackupParametersDomain? Create(DatabaseBackupParametersModel? dbBackupParameters)
+    public static DatabaseBackupParametersDomain Create(DatabaseBackupParametersModel? dbBackupParameters)
     {
-        if (dbBackupParameters is null)
-        {
-            StShared.WriteErrorLine("dbBackupParameters is null", true);
-            return null;
-        }
+        var computerName = Environment.MachineName;
 
-        if (string.IsNullOrWhiteSpace(dbBackupParameters.BackupNamePrefix))
-        {
-            StShared.WriteErrorLine("dbBackupParameters.BackupNamePrefix does not specified", true);
-            return null;
-        }
-
-        if (string.IsNullOrWhiteSpace(dbBackupParameters.BackupFileExtension))
-        {
-            StShared.WriteErrorLine("dbBackupParameters.BackupFileExtension does not specified", true);
-            return null;
-        }
-
-        if (string.IsNullOrWhiteSpace(dbBackupParameters.BackupNameMiddlePart))
-        {
-            StShared.WriteErrorLine("dbBackupParameters.BackupNameMiddlePart does not specified", true);
-            return null;
-        }
-
-        return new DatabaseBackupParametersDomain(dbBackupParameters.BackupNamePrefix,
-            string.IsNullOrWhiteSpace(dbBackupParameters.DateMask) ? "yyyyMMddHHmmss" : dbBackupParameters.DateMask,
-            dbBackupParameters.BackupFileExtension, dbBackupParameters.BackupNameMiddlePart,
-            dbBackupParameters.Compress, dbBackupParameters.Verify, dbBackupParameters.BackupType
-            //, //dbServerName,
-            //dbServerSideBackupPath
-            );
+        return new DatabaseBackupParametersDomain(
+            GetValueOrDefault(dbBackupParameters?.BackupNamePrefix, $"{computerName}_"),
+            GetValueOrDefault(dbBackupParameters?.DateMask, "yyyyMMddHHmmss"),
+            GetValueOrDefault(dbBackupParameters?.BackupFileExtension, ".bak"),
+            GetValueOrDefault(dbBackupParameters?.BackupNameMiddlePart, "_FullDb_"),
+            dbBackupParameters?.Compress ?? true, dbBackupParameters?.Verify ?? true,
+            dbBackupParameters?.BackupType ?? EBackupType.Full);
     }
+
+    private static string GetValueOrDefault(string? val, string def)
+    {
+        return string.IsNullOrWhiteSpace(val) ? def : val;
+    }
+
 
     public string GetPrefix(string databaseName)
     {
