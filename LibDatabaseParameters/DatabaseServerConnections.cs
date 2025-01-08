@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 
 namespace LibDatabaseParameters;
 
@@ -14,14 +13,14 @@ public sealed class DatabaseServerConnections
         _databaseServerConnections = databaseServerConnections;
     }
 
-    public static DatabaseServerConnections Create(IConfiguration configuration)
-    {
-        var databaseServerConnectionsParameters = configuration.GetSection("DatabaseServerConnections");
-        var databaseServerConnections =
-            databaseServerConnectionsParameters.Get<Dictionary<string, DatabaseServerConnectionData>>();
-        return new DatabaseServerConnections(databaseServerConnections ??
-                                             new Dictionary<string, DatabaseServerConnectionData>());
-    }
+    //public static DatabaseServerConnections Create(IConfiguration configuration)
+    //{
+    //    var databaseServerConnectionsParameters = configuration.GetSection("DatabaseServerConnections");
+    //    var databaseServerConnections =
+    //        databaseServerConnectionsParameters.Get<Dictionary<string, DatabaseServerConnectionData>>();
+    //    return new DatabaseServerConnections(databaseServerConnections ??
+    //                                         new Dictionary<string, DatabaseServerConnectionData>());
+    //}
 
     public DatabaseServerConnectionData? GetDatabaseServerConnectionByKey(string key)
     {
