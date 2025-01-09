@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DbTools;
 using DbTools.Models;
 using LibParameters;
 
@@ -8,18 +7,18 @@ namespace LibDatabaseParameters;
 public sealed class DatabaseServerConnectionDataDomain : ItemData
 {
     // ReSharper disable once ConvertToPrimaryConstructor
-    public DatabaseServerConnectionDataDomain(EDataProvider dataProvider, string serverAddress,
+    public DatabaseServerConnectionDataDomain(EDatabaseServerProvider databaseServerProvider, string serverAddress,
         DbAuthSettingsBase dbAuthSettings, bool trustServerCertificate,
         Dictionary<string, DatabaseFoldersSet> databaseFoldersSets)
     {
-        DataProvider = dataProvider;
+        DatabaseServerProvider = databaseServerProvider;
         ServerAddress = serverAddress;
         DbAuthSettings = dbAuthSettings;
         TrustServerCertificate = trustServerCertificate;
         DatabaseFoldersSets = databaseFoldersSets;
     }
 
-    public EDataProvider DataProvider { get; set; }
+    public EDatabaseServerProvider DatabaseServerProvider { get; set; }
     public string ServerAddress { get; set; }
     public DbAuthSettingsBase DbAuthSettings { get; }
     public bool TrustServerCertificate { get; }

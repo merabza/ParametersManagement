@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DbTools;
 using DbTools.Models;
 using LibParameters;
 
@@ -8,8 +7,7 @@ namespace LibDatabaseParameters;
 public sealed class DatabaseServerConnectionData : ItemData
 {
     public const string DefaultName = "Default";
-
-    public EDataProvider DataProvider { get; set; }
+    public EDatabaseServerProvider DatabaseServerProvider { get; set; } = EDatabaseServerProvider.SqlServer;
     public bool WindowsNtIntegratedSecurity { get; set; }
     public string? ServerAddress { get; set; }
     public string? ServerUser { get; set; }
