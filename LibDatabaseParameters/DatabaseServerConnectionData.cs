@@ -7,11 +7,19 @@ namespace LibDatabaseParameters;
 public sealed class DatabaseServerConnectionData : ItemData
 {
     public const string DefaultName = "Default";
-    public EDatabaseServerProvider DatabaseServerProvider { get; set; } = EDatabaseServerProvider.SqlServer;
+    public EDatabaseProvider DatabaseServerProvider { get; set; } = EDatabaseProvider.None;
+    
+    //მონაცემთა ბაზასთან დამაკავშირებელი ვებაგენტის სახელი
+    public string? DbWebAgentName { get; set; }
+
+    //ვებაგენტის მხარეს მონაცემთა ბაზასთან დამაკავშირებელი სახელი
+    public string? RemoteDbConnectionName { get; set; }
+
+
     public bool WindowsNtIntegratedSecurity { get; set; }
     public string? ServerAddress { get; set; }
-    public string? ServerUser { get; set; }
-    public string? ServerPass { get; set; }
+    public string? User { get; set; }
+    public string? Password { get; set; }
     public bool TrustServerCertificate { get; set; }
     public int ConnectionTimeOut { get; set; }
     public bool Encrypt { get; set; }
