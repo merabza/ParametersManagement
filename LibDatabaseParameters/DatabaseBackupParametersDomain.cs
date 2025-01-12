@@ -10,6 +10,7 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     // ReSharper disable once ConvertToPrimaryConstructor
     //public გამოიყენება WebAgent-ში
     //, string? dbServerSideBackupPath
+    // ReSharper disable once MemberCanBePrivate.Global
     public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
         string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType)
     {
@@ -23,10 +24,10 @@ public sealed class DatabaseBackupParametersDomain : IParameters
         //DbServerSideBackupPath = dbServerSideBackupPath;
     }
 
-    public string BackupNamePrefix { get; }
+    private string BackupNamePrefix { get; }
     public string DateMask { get; }
-    public string BackupFileExtension { get; }
-    public string BackupNameMiddlePart { get; }
+    private string BackupFileExtension { get; }
+    private string BackupNameMiddlePart { get; }
 
     public bool Compress { get; }
     public bool Verify { get; }
