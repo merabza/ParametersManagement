@@ -8,7 +8,7 @@ public sealed class DatabaseServerConnectionData : ItemData
 {
     public const string DefaultName = "Default";
     public EDatabaseProvider DatabaseServerProvider { get; set; } = EDatabaseProvider.None;
-    
+
     //მონაცემთა ბაზასთან დამაკავშირებელი ვებაგენტის სახელი
     public string? DbWebAgentName { get; set; }
 
@@ -16,8 +16,8 @@ public sealed class DatabaseServerConnectionData : ItemData
     public string? RemoteDbConnectionName { get; set; }
 
 
-    public bool WindowsNtIntegratedSecurity { get; set; }
     public string? ServerAddress { get; set; }
+    public bool WindowsNtIntegratedSecurity { get; set; }
     public string? User { get; set; }
     public string? Password { get; set; }
     public bool TrustServerCertificate { get; set; }
