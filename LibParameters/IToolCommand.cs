@@ -6,6 +6,6 @@ namespace LibParameters;
 public interface IToolCommand
 {
     IParameters Par { get; }
-    string? Description { get; }
+    string Description { get; }
     ValueTask<bool> Run(CancellationToken cancellationToken = default);
 }

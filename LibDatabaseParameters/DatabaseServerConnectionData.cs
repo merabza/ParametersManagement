@@ -6,7 +6,7 @@ namespace LibDatabaseParameters;
 
 public sealed class DatabaseServerConnectionData : ItemData
 {
-    public const string DefaultName = "Default";
+    private const string DefaultName = "Default";
     public EDatabaseProvider DatabaseServerProvider { get; set; } = EDatabaseProvider.None;
 
     //მონაცემთა ბაზასთან დამაკავშირებელი ვებაგენტის სახელი
