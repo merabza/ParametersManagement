@@ -1,7 +1,7 @@
-﻿using LibParameters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LibParameters;
 using SystemToolsShared;
 
 namespace LibFileParameters.Models;
@@ -37,13 +37,10 @@ public sealed class SmartSchema : ItemData
 
 
         //განვიხილოთ ყველაზე პატარა დეტალის გარდა ყველა დანარჩენი
-        foreach (var res in Details.Where(w => w.PeriodType != minPeriodType).Select(
-                     smartSchemaDetail =>
-                         files.GroupBy(g => g.FileDateTime.StartOfPeriod(smartSchemaDetail.PeriodType),
-                                 g => g.FileDateTime,
-                                 (s, d) => new { Key = s, Min = d.Min() }).Reverse()
-                             .Take(smartSchemaDetail.PreserveCount)
-                             .Select(s => s.Min)))
+        foreach (var res in Details.Where(w => w.PeriodType != minPeriodType).Select(smartSchemaDetail =>
+                     files.GroupBy(g => g.FileDateTime.StartOfPeriod(smartSchemaDetail.PeriodType), g => g.FileDateTime,
+                             (s, d) => new { Key = s, Min = d.Min() }).Reverse().Take(smartSchemaDetail.PreserveCount)
+                         .Select(s => s.Min)))
             preserveDates.AddRange(res);
 
         return preserveDates.Distinct().ToList();

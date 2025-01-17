@@ -1,5 +1,5 @@
-﻿using LibParameters;
-using System;
+﻿using System;
+using LibParameters;
 using SystemToolsShared;
 
 namespace LibFileParameters.Models;
@@ -41,7 +41,7 @@ public sealed class FileStorageData : ItemData
     }
 
     public static bool IsSameToLocal(FileStorageData forFileStorage, string localPath)
-    //,IMessagesDataManager? messagesDataManager, string? userName)
+        //,IMessagesDataManager? messagesDataManager, string? userName)
     {
         var fileStoragePath = forFileStorage.FileStoragePath;
         //ან თუ წყაროს ფაილსაცავი ლოკალურია და მისი ფოლდერი ემთხვევა პარამეტრების ლოკალურ ფოლდერს.

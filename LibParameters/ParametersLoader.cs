@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
+using Newtonsoft.Json;
 using SystemToolsShared;
 
 namespace LibParameters;
@@ -37,8 +37,7 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
 
             var settings = new JsonSerializerSettings
             {
-                NullValueHandling = NullValueHandling.Ignore,
-                MissingMemberHandling = MissingMemberHandling.Ignore
+                NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore
             };
 
 
