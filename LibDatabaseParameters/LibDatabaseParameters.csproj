@@ -8,7 +8,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\DatabaseTools\DbTools\DbTools.csproj" />
+        <ProjectReference Include="..\..\ToolsManagement\FileManagersMain\FileManagersMain.csproj" />
         <ProjectReference Include="..\LibApiClientParameters\LibApiClientParameters.csproj" />
+        <ProjectReference Include="..\LibFileParameters\LibFileParameters.csproj" />
         <ProjectReference Include="..\LibParameters\LibParameters.csproj" />
     </ItemGroup>
 
