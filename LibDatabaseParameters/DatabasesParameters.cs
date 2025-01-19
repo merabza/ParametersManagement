@@ -22,10 +22,6 @@ public sealed class DatabasesParameters : ParametersWithStatus
 
     public string? DatabaseName { get; set; }
 
-    ////ეს პარამეტრები საჭიროა, როცა ბაზა არის ფაილის ტიპის. მაგალითად, SQLite ან აქსესის ბაზებისთვის
-    //public string? DatabaseFilePath { get; set; }
-    //public string? DatabasePassword { get; set; }
-
     //ჭკვიანი სქემის სახელი. გამოიყენება ძველი დასატოვებელი და წასაშლელი ფაილების განსასაზღვრად. (ბაზის სერვერის მხარეს)
     //ბაზის სერვერის მხარეს არსებული ჭკვიანი სქემის სახელებიუს მოტვირთვა შესაძლებელი უნდა იყოს რედაქტირების დროს
     public string? SmartSchemaName { get; set; }

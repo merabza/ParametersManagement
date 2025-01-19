@@ -2,6 +2,7 @@
 
 namespace LibDatabaseParameters;
 
+// ReSharper disable once ClassNeverInstantiated.Global
 public sealed class DatabasesBackupFilesExchangeParameters : ParametersWithStatus
 {
     //ჩამოტვირთვისა და ატვირთვის დროებითი გაფართოებები
