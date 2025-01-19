@@ -30,4 +30,5 @@ public sealed class DatabasesParameters : ParametersWithStatus
     //ბაზის ბექაპების გაცვლისათვის გამოსადეგი ფაილსაცავების ნიკების მოტვირთვა შესაძლებელი უნდა იყოს რედაქტირების დროს
     public string? FileStorageName { get; set; }
     public int CommandTimeOut { get; set; }
+    public bool SkipBackupBeforeRestore { get; set; }
 }
