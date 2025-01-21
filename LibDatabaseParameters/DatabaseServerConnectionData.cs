@@ -22,8 +22,10 @@ public sealed class DatabaseServerConnectionData : ItemData
     public string? Password { get; set; }
     public bool TrustServerCertificate { get; set; }
     public int ConnectionTimeOut { get; set; }
+
     public bool Encrypt { get; set; }
-    public DatabaseBackupParametersModel? FullDbBackupParameters { get; set; }
+
+    //public DatabaseBackupParametersModel? FullDbBackupParameters { get; set; }
     public Dictionary<string, DatabaseFoldersSet> DatabaseFoldersSets { get; set; } = [];
 
     public void SetDefaultFolders(DbServerInfo dbServerInfo)
