@@ -2,7 +2,7 @@
 
 namespace LibDatabaseParameters;
 
-public sealed class DatabasesParameters : ParametersWithStatus
+public sealed class DatabaseParameters : ParametersWithStatus
 {
     //public EDataProvider DataProvider { get; set; }
 
