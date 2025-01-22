@@ -32,5 +32,4 @@ public sealed class DatabaseParameters : ParametersWithStatus
     public int CommandTimeOut { get; set; }
     public bool SkipBackupBeforeRestore { get; set; }
     public DatabaseBackupParametersModel? DatabaseBackupParameters { get; set; }
-
 }
