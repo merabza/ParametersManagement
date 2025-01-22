@@ -31,4 +31,6 @@ public sealed class DatabaseParameters : ParametersWithStatus
     public string? FileStorageName { get; set; }
     public int CommandTimeOut { get; set; }
     public bool SkipBackupBeforeRestore { get; set; }
+    public DatabaseBackupParametersModel? DatabaseBackupParameters { get; set; }
+
 }
