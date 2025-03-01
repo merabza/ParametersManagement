@@ -18,6 +18,7 @@ public sealed class DatabaseParameters : ParametersWithStatus
     ////ვებაგენტის მხარეს მონაცემთა ბაზასთან დამაკავშირებელი სახელი
     //public string? RemoteDbConnectionName { get; set; }
 
+    public EDatabaseRecoveryModel DatabaseRecoveryModel { get; set; }
     public string? DbServerFoldersSetName { get; set; }
 
     public string? DatabaseName { get; set; }
