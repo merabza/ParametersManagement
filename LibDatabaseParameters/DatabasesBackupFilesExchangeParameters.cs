@@ -5,6 +5,9 @@ namespace LibDatabaseParameters;
 // ReSharper disable once ClassNeverInstantiated.Global
 public sealed class DatabasesBackupFilesExchangeParameters : ParametersWithStatus
 {
+    public const string DefaultDownloadTempExtension = ".down!";
+    public const string DefaultUploadTempExtension = ".up!";
+
     //ჩამოტვირთვისა და ატვირთვის დროებითი გაფართოებები
     public string? DownloadTempExtension { get; set; }
     public string? UploadTempExtension { get; set; }

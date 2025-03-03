@@ -1,26 +1,23 @@
-﻿using LibParameters;
+﻿using DbTools;
+using LibParameters;
 
 namespace LibDatabaseParameters;
 
 public sealed class DatabaseParameters : ParametersWithStatus
 {
-    //public EDataProvider DataProvider { get; set; }
+    public const EDatabaseRecoveryModel DefaultDatabaseRecoveryModel = EDatabaseRecoveryModel.Full;
+    public const EBackupType DefaultBackupType = EBackupType.Full;
 
-    //შემდეგი 2 პარამეტრიდან გამოიყენება ერთერთი
-    //ორივეს ერთდროულად შევსება არ შეიძლება.
-    //ორივეს ცარელა დატოვება არ შეიძლება
+    public const bool DefaultCompress = true;
+    public const bool DefaultVerify = true;
+    public const string DefaultDateMask = "yyyyMMddHHmmss";
+    public const string DefaultBackupFileExtension = ".bak";
+    public const string DefaultBackupNameMiddlePart = "_FullDb_";
+
     //მონაცემთა ბაზასთან კავშირის სახელი
     public string? DbConnectionName { get; set; }
-
-    ////მონაცემთა ბაზასთან დამაკავშირებელი ვებაგენტის სახელი
-    //public string? DbWebAgentName { get; set; }
-
-    ////ვებაგენტის მხარეს მონაცემთა ბაზასთან დამაკავშირებელი სახელი
-    //public string? RemoteDbConnectionName { get; set; }
-
-    public EDatabaseRecoveryModel DatabaseRecoveryModel { get; set; }
+    public EDatabaseRecoveryModel? DatabaseRecoveryModel { get; set; }
     public string? DbServerFoldersSetName { get; set; }
-
     public string? DatabaseName { get; set; }
 
     //ჭკვიანი სქემის სახელი. გამოიყენება ძველი დასატოვებელი და წასაშლელი ფაილების განსასაზღვრად. (ბაზის სერვერის მხარეს)
@@ -32,5 +29,11 @@ public sealed class DatabaseParameters : ParametersWithStatus
     public string? FileStorageName { get; set; }
     public int CommandTimeOut { get; set; }
     public bool SkipBackupBeforeRestore { get; set; }
-    public DatabaseBackupParametersModel? DatabaseBackupParameters { get; set; }
+    public string? BackupNamePrefix { get; set; }
+    public string? DateMask { get; set; }
+    public string? BackupFileExtension { get; set; }
+    public string? BackupNameMiddlePart { get; set; }
+    public bool? Compress { get; set; }
+    public bool? Verify { get; set; }
+    public EBackupType? BackupType { get; set; }
 }
