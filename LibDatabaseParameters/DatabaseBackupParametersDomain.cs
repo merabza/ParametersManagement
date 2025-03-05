@@ -47,10 +47,10 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     //        dbBackupParameters?.BackupType ?? EBackupType.Full);
     //}
 
-    private static string GetValueOrDefault(string? val, string def)
-    {
-        return string.IsNullOrWhiteSpace(val) ? def : val;
-    }
+    //private static string GetValueOrDefault(string? val, string def)
+    //{
+    //    return string.IsNullOrWhiteSpace(val) ? def : val;
+    //}
 
     public string GetPrefix(string databaseName)
     {
