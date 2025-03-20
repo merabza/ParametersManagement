@@ -7,7 +7,6 @@ public sealed class ApiClients
 {
     private readonly Dictionary<string, ApiClientSettings> _apiClientSettings;
 
-
     // ReSharper disable once ConvertToPrimaryConstructor
     public ApiClients(Dictionary<string, ApiClientSettings> apiClients)
     {

@@ -13,7 +13,6 @@ public sealed class FileStorageData : ItemData
     public int FileSizeSplitPositionInRow { get; set; }
     public int FtpSiteLsFileOffset { get; set; }
 
-
     //public bool IsSameToLocal(string localPath)
     //{
     //  //ან თუ წყაროს ფაილსაცავი ლოკალურია და მისი ფოლდერი ემთხვევა პარამეტრების ლოკალურ ფოლდერს.

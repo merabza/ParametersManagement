@@ -35,7 +35,6 @@ public sealed class SmartSchema : ItemData
             w >= DateTime.Now.StartOfPeriod(minPeriodSmartSchemaDetail.PeriodType)
                 .DateAdd(minPeriodSmartSchemaDetail.PeriodType, -minPeriodSmartSchemaDetail.PreserveCount)));
 
-
         //განვიხილოთ ყველაზე პატარა დეტალის გარდა ყველა დანარჩენი
         foreach (var res in Details.Where(w => w.PeriodType != minPeriodType).Select(smartSchemaDetail =>
                      files.GroupBy(g => g.FileDateTime.StartOfPeriod(smartSchemaDetail.PeriodType), g => g.FileDateTime,
@@ -45,7 +44,6 @@ public sealed class SmartSchema : ItemData
 
         return preserveDates.Distinct().ToList();
     }
-
 
     public List<BuFileInfo> GetFilesForDeleteBySchema(List<BuFileInfo> files)
     {

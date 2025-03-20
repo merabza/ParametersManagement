@@ -15,7 +15,6 @@ public sealed class DatabaseServerConnectionData : ItemData
     //ვებაგენტის მხარეს მონაცემთა ბაზასთან დამაკავშირებელი სახელი
     public string? RemoteDbConnectionName { get; set; }
 
-
     public string? ServerAddress { get; set; }
     public bool WindowsNtIntegratedSecurity { get; set; }
     public string? ServerUser { get; set; }

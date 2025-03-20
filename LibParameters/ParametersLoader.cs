@@ -18,7 +18,6 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
     public IParameters? Par { get; private set; }
     public string? ParametersFileName { get; set; }
 
-
     public bool TryLoadParameters(string paramsFileName, bool shoWError = true)
     {
         Par = null;
@@ -39,7 +38,6 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
             {
                 NullValueHandling = NullValueHandling.Ignore, MissingMemberHandling = MissingMemberHandling.Ignore
             };
-
 
             var parameters = JsonConvert.DeserializeObject<T>(json, settings);
             reader.Close();

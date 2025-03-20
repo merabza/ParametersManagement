@@ -52,7 +52,6 @@ public sealed class ParametersManager : IParametersManager
 
         //დავადგინოთ არსებობს თუ არა ძალიან ძველი bak ფაილები და წავშალოთ
 
-
         Parameters = parameters;
         if (string.IsNullOrWhiteSpace(message))
             return;
