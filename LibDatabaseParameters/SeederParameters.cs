@@ -1,7 +1,6 @@
-﻿using LibDatabaseParameters;
-using LibParameters;
+﻿using LibParameters;
 
-namespace DbContextAnalyzer.Models;
+namespace LibDatabaseParameters;
 
 public sealed class SeederParameters : IParameters
 {
