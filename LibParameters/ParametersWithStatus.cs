@@ -1,6 +1,6 @@
 ﻿namespace LibParameters;
 
-public class ParametersWithStatus : IParameters
+public /*open*/ class ParametersWithStatus : IParameters
 {
     public bool CheckBeforeSave()
     {
