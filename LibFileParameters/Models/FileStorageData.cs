@@ -34,9 +34,8 @@ public sealed class FileStorageData : ItemData
     {
         if (string.IsNullOrWhiteSpace(FileStoragePath))
             return null;
-        if (!Uri.TryCreate(FileStoragePath, UriKind.Absolute, out var uri))
-            return false;
-        return uri.Scheme.ToLower() == "ftp";
+        return Uri.TryCreate(FileStoragePath, UriKind.Absolute, out var uri) &&
+               uri.Scheme.Equals("ftp", StringComparison.CurrentCultureIgnoreCase);
     }
 
     public static bool IsSameToLocal(FileStorageData forFileStorage, string localPath)
@@ -50,5 +49,10 @@ public sealed class FileStorageData : ItemData
         if (FileStat.IsFileSchema(fileStoragePath))
             return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(fileStoragePath);
         return false;
+    }
+
+    public override string GetItemKey()
+    {
+        return $"{FileStoragePath} {UserName ?? string.Empty}";
     }
 }

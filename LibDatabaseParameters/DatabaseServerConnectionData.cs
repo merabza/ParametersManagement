@@ -51,4 +51,9 @@ public sealed class DatabaseServerConnectionData : ItemData
                 defSet.DataLog = dbServerInfo.DefaultLogDirectory;
         }
     }
+
+    public override string GetItemKey()
+    {
+        return $"{DatabaseServerProvider} {ServerAddress}";
+    }
 }
