@@ -24,7 +24,8 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
         try
         {
             // ReSharper disable once using
-            using StreamReader reader = new(paramsFileName);
+            // ReSharper disable once DisposableConstructor
+            using var reader = new StreamReader(paramsFileName);
 
             var json = reader.ReadToEnd();
             string? decryptedJson = null;
