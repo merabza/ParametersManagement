@@ -23,6 +23,6 @@ public sealed class Archivers
     public ArchiverData? GetArchiverDataByKey(string key)
     {
         //_logger.LogError($"File storage with name {key} not found");
-        return _archivers.TryGetValue(key, out var value) ? value : null;
+        return _archivers.GetValueOrDefault(key);
     }
 }
