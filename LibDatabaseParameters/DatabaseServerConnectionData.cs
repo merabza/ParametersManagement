@@ -25,10 +25,11 @@ public sealed class DatabaseServerConnectionData : ItemData
     public bool Encrypt { get; set; }
 
     //public DatabaseBackupParametersModel? FullDbBackupParameters { get; set; }
-    public Dictionary<string, DatabaseFoldersSet> DatabaseFoldersSets { get; set; } = [];
+    public Dictionary<string, DatabaseFoldersSet>? DatabaseFoldersSets { get; set; } = [];
 
     public void SetDefaultFolders(DbServerInfo dbServerInfo)
     {
+        DatabaseFoldersSets ??= [];
         if (!DatabaseFoldersSets.TryGetValue(DefaultName, out var defSet))
         {
             DatabaseFoldersSets.Add(DefaultName,
