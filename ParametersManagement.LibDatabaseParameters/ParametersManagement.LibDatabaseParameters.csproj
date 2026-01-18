@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\DatabaseTools\DatabaseTools.DbTools\DatabaseTools.DbTools.csproj" />
+        <ProjectReference Include="..\ParametersManagement.LibApiClientParameters\ParametersManagement.LibApiClientParameters.csproj" />
+        <ProjectReference Include="..\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
+    </ItemGroup>
+
+</Project>
