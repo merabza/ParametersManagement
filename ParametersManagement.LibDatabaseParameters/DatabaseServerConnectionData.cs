@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DatabaseTools.DbTools.Models;
-using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 
 namespace ParametersManagement.LibDatabaseParameters;
 
@@ -30,7 +30,7 @@ public sealed class DatabaseServerConnectionData : ItemData
     public void SetDefaultFolders(DbServerInfo dbServerInfo)
     {
         DatabaseFoldersSets ??= [];
-        if (!DatabaseFoldersSets.TryGetValue(DefaultName, out var defSet))
+        if (!DatabaseFoldersSets.TryGetValue(DefaultName, out DatabaseFoldersSet? defSet))
         {
             DatabaseFoldersSets.Add(DefaultName,
                 new DatabaseFoldersSet
@@ -43,13 +43,19 @@ public sealed class DatabaseServerConnectionData : ItemData
         else
         {
             if (string.IsNullOrWhiteSpace(defSet.Backup) || defSet.Backup != dbServerInfo.BackupDirectory)
+            {
                 defSet.Backup = dbServerInfo.BackupDirectory;
+            }
 
             if (string.IsNullOrWhiteSpace(defSet.Data) || defSet.Data != dbServerInfo.DefaultDataDirectory)
+            {
                 defSet.Data = dbServerInfo.DefaultDataDirectory;
+            }
 
             if (string.IsNullOrWhiteSpace(defSet.DataLog) || defSet.DataLog != dbServerInfo.DefaultLogDirectory)
+            {
                 defSet.DataLog = dbServerInfo.DefaultLogDirectory;
+            }
         }
     }
 

@@ -1,0 +1,18 @@
+<Solution>
+    <Folder Name="/DatabaseTools/">
+        <Project Path="../DatabaseTools/DatabaseTools.DbTools/DatabaseTools.DbTools.csproj" />
+    </Folder>
+    <Folder Name="/Solution Items/">
+        <File Path=".editorconfig" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Packages.props" />
+    </Folder>
+    <Folder Name="/SystemTools/">
+        <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
+    </Folder>
+    <Project Path="ParametersManagement.LibApiClientParameters/ParametersManagement.LibApiClientParameters.csproj" />
+    <Project Path="ParametersManagement.LibDatabaseParameters/ParametersManagement.LibDatabaseParameters.csproj" />
+    <Project Path="ParametersManagement.LibFileParameters/ParametersManagement.LibFileParameters.csproj" />
+    <Project Path="ParametersManagement.LibParameters/ParametersManagement.LibParameters.csproj" />
+    <Project Path="ParametersManagement/ParametersManagement.csproj" />
+</Solution>

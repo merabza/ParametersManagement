@@ -22,6 +22,8 @@ public sealed class SmartSchemas
     public SmartSchema? GetSmartSchemaByKey(string? key)
     {
         //_logger.LogError($"File storage with name {key} not found");
-        return string.IsNullOrWhiteSpace(key) || !_smartSchemas.TryGetValue(key, out var schema) ? null : schema;
+        return string.IsNullOrWhiteSpace(key) || !_smartSchemas.TryGetValue(key, out SmartSchema? schema)
+            ? null
+            : schema;
     }
 }

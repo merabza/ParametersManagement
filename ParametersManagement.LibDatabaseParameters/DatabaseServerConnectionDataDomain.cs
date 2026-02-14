@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DatabaseTools.DbTools.Models;
-using ParametersManagement.LibParameters;
+using SystemTools.SystemToolsShared;
 
 namespace ParametersManagement.LibDatabaseParameters;
 

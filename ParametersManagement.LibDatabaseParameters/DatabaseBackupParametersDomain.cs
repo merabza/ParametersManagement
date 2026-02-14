@@ -38,7 +38,7 @@ public sealed class DatabaseBackupParametersDomain : IParameters
     //Create გამოიყენება ApAgent-ში
     public static DatabaseBackupParametersDomain Create(DatabaseParameters? dbBackupParameters)
     {
-        var computerName = Environment.MachineName;
+        string computerName = Environment.MachineName;
 
         return new DatabaseBackupParametersDomain(
             GetValueOrDefault(dbBackupParameters?.BackupNamePrefix, $"{computerName}_"),

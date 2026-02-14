@@ -27,13 +27,17 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
             // ReSharper disable once DisposableConstructor
             using var reader = new StreamReader(paramsFileName);
 
-            var json = reader.ReadToEnd();
+            string json = reader.ReadToEnd();
             string? decryptedJson = null;
             if (_encKey != null)
+            {
                 decryptedJson = EncryptDecrypt.DecryptString(json, _encKey);
+            }
 
             if (decryptedJson != null)
+            {
                 json = decryptedJson;
+            }
 
             var settings = new JsonSerializerSettings
             {
@@ -48,7 +52,9 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
         catch (Exception e)
         {
             if (shoWError)
+            {
                 StShared.WriteException(e, true);
+            }
         }
 
         return false;

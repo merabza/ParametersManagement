@@ -14,6 +14,6 @@ public sealed class ExcludeSets
 
     public ExcludeSet? GetExcludeSetByKey(string key)
     {
-        return _excludeSet.ContainsKey(key) ? _excludeSet[key] : null;
+        return _excludeSet.GetValueOrDefault(key);
     }
 }

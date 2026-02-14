@@ -1,5 +1,4 @@
 ﻿using System;
-using ParametersManagement.LibParameters;
 using SystemTools.SystemToolsShared;
 
 namespace ParametersManagement.LibFileParameters.Models;
@@ -26,28 +25,40 @@ public sealed class FileStorageData : ItemData
     public bool? IsFileSchema()
     {
         if (string.IsNullOrWhiteSpace(FileStoragePath))
+        {
             return null;
+        }
+
         return FileStat.IsFileSchema(FileStoragePath);
     }
 
     public bool? IsFtp()
     {
         if (string.IsNullOrWhiteSpace(FileStoragePath))
+        {
             return null;
-        return Uri.TryCreate(FileStoragePath, UriKind.Absolute, out var uri) &&
-               uri.Scheme.Equals("ftp", StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        return Uri.TryCreate(FileStoragePath, UriKind.Absolute, out Uri? uri) &&
+               uri.Scheme.Equals("ftp", StringComparison.OrdinalIgnoreCase);
     }
 
     public static bool IsSameToLocal(FileStorageData forFileStorage, string localPath)
         //,IMessagesDataManager? messagesDataManager, string? userName)
     {
-        var fileStoragePath = forFileStorage.FileStoragePath;
+        string? fileStoragePath = forFileStorage.FileStoragePath;
         //ან თუ წყაროს ფაილსაცავი ლოკალურია და მისი ფოლდერი ემთხვევა პარამეტრების ლოკალურ ფოლდერს.
         //   მაშინ მოქაჩვა საჭირო აღარ არის
-        if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath)) return false;
+        if (fileStoragePath is null || string.IsNullOrWhiteSpace(localPath))
+        {
+            return false;
+        }
 
         if (FileStat.IsFileSchema(fileStoragePath))
+        {
             return FileStat.NormalizePath(localPath) == FileStat.NormalizePath(fileStoragePath);
+        }
+
         return false;
     }
 
