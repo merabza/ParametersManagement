@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SystemTools.SystemToolsShared;
 
@@ -21,7 +22,7 @@ public sealed class ParametersManager : IParametersManager
 
     public IParameters Parameters { get; set; }
 
-    public void Save(IParameters parameters, string? message, string? saveAsFilePath = null)
+    public async ValueTask Save(IParameters parameters, string? message, string? saveAsFilePath = null)
     {
         if (!string.IsNullOrWhiteSpace(saveAsFilePath))
         {
@@ -55,7 +56,7 @@ public sealed class ParametersManager : IParametersManager
         }
 
         //შევინახოთ პარამეტრების ფაილი
-        File.WriteAllText(filePathForSave, paramsJsonText);
+        await File.WriteAllTextAsync(filePathForSave, paramsJsonText);
 
         //დავადგინოთ არსებობს თუ არა ძალიან ძველი bak ფაილები და წავშალოთ
 
