@@ -13,10 +13,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ParametersManagement.LibApiClientParameters\ParametersManagement.LibApiClientParameters.csproj" />
-      <ProjectReference Include="..\ParametersManagement.LibDatabaseParameters\ParametersManagement.LibDatabaseParameters.csproj" />
-      <ProjectReference Include="..\ParametersManagement.LibFileParameters\ParametersManagement.LibFileParameters.csproj" />
-      <ProjectReference Include="..\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
+        <ProjectReference
+            Include="..\ParametersManagement.LibApiClientParameters\ParametersManagement.LibApiClientParameters.csproj" />
+        <ProjectReference
+            Include="..\ParametersManagement.LibDatabaseParameters\ParametersManagement.LibDatabaseParameters.csproj" />
+        <ProjectReference
+            Include="..\ParametersManagement.LibFileParameters\ParametersManagement.LibFileParameters.csproj" />
+        <ProjectReference Include="..\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
     </ItemGroup>
 
 </Project>
