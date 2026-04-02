@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SystemTools.SystemToolsShared;
 
 namespace ParametersManagement.LibParameters;
@@ -38,6 +39,20 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
             {
                 json = decryptedJson;
             }
+
+            try
+            {
+                JToken.Parse(json);
+            }
+            catch (JsonReaderException)
+            {
+                if (shoWError)
+                {
+                    StShared.WriteErrorLine("Invalid JSON format after decryption", true);
+                }
+                return false;
+            }
+
 
             var settings = new JsonSerializerSettings
             {
