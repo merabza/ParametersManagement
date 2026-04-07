@@ -50,9 +50,9 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
                 {
                     StShared.WriteErrorLine("Invalid JSON format after decryption", true);
                 }
+
                 return false;
             }
-
 
             var settings = new JsonSerializerSettings
             {
