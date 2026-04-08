@@ -35,7 +35,7 @@ public sealed class DatabaseBackupParametersDomain : IParameters
         return true;
     }
 
-    //Create გამოიყენება ApAgent-ში
+    //Create გამოიყენება Replicator-ში
     public static DatabaseBackupParametersDomain Create(DatabaseParameters? dbBackupParameters)
     {
         string computerName = Environment.MachineName;
