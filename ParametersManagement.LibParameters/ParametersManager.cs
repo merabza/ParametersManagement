@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using SystemTools.SystemToolsShared;
 
@@ -9,13 +10,22 @@ namespace ParametersManagement.LibParameters;
 
 public sealed class ParametersManager : IParametersManager
 {
-    private readonly string? _encKey;
+    //private readonly string? _encKey;
+
+    // ReSharper disable once UnusedMember.Global
+    public ParametersManager(IOptions<MainParametersManagerOptions> options)
+        //string? parametersFileName, IParameters parameters, string? encKey = null)
+    {
+        ParametersFileName = options.Value.ParametersFileName;
+        //_encKey = encKey;
+        Parameters = options.Value.Par;
+    }
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public ParametersManager(string? parametersFileName, IParameters parameters, string? encKey = null)
+    public ParametersManager(string? parametersFileName, IParameters parameters)
     {
         ParametersFileName = parametersFileName;
-        _encKey = encKey;
+        //_encKey = encKey;
         Parameters = parameters;
     }
 
@@ -36,14 +46,14 @@ public sealed class ParametersManager : IParametersManager
             StShared.WriteWarningLine("Something wrong with data for save", true, null, true);
         }
 
-        string? paramsJsonText = JsonConvert.SerializeObject(parameters, Formatting.Indented);
+        string paramsJsonText = JsonConvert.SerializeObject(parameters, Formatting.Indented);
 
         //იშიფრება მთლიანი json ტექსტი. ამის გამო შეუძლებელია მანქანებს შორის სეთინგების გადატანა
         //შესაბამისად შესაძლებელი უნდა იყოს გაშიფრული ვარიანტის შენახვა
-        if (_encKey != null)
-        {
-            paramsJsonText = EncryptDecrypt.EncryptString(paramsJsonText, _encKey);
-        }
+        //if (_encKey != null)
+        //{
+        //    paramsJsonText = EncryptDecrypt.EncryptString(paramsJsonText, _encKey);
+        //}
 
         string? filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : ParametersFileName;
 
