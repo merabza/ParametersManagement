@@ -8,13 +8,9 @@ namespace ParametersManagement.LibParameters;
 
 public sealed class ParametersLoader<T> where T : class, IParameters, new()
 {
-    private readonly string? _encKey;
+    //private readonly string? _encKey;
 
     // ReSharper disable once ConvertToPrimaryConstructor
-    public ParametersLoader(string? encKey = null)
-    {
-        _encKey = encKey;
-    }
 
     public IParameters? Par { get; private set; }
     public string? ParametersFileName { get; set; }
@@ -29,16 +25,16 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
             using var reader = new StreamReader(paramsFileName);
 
             string json = reader.ReadToEnd();
-            string? decryptedJson = null;
-            if (_encKey != null)
-            {
-                decryptedJson = EncryptDecrypt.DecryptString(json, _encKey);
-            }
+            //string? decryptedJson = null;
+            //if (_encKey != null)
+            //{
+            //    decryptedJson = EncryptDecrypt.DecryptString(json, _encKey);
+            //}
 
-            if (decryptedJson != null)
-            {
-                json = decryptedJson;
-            }
+            //if (decryptedJson != null)
+            //{
+            //    json = decryptedJson;
+            //}
 
             try
             {
