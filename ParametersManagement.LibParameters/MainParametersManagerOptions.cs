@@ -2,6 +2,6 @@
 
 public class MainParametersManagerOptions
 {
-    public string ParametersFileName { get; set; }
-    public IParameters Par { get; set; }
+    public required string ParametersFileName { get; set; }
+    public required IParameters Par { get; set; }
 }

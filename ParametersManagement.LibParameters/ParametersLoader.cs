@@ -13,7 +13,7 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
     // ReSharper disable once ConvertToPrimaryConstructor
 
     public IParameters? Par { get; private set; }
-    public string ParametersFileName { get; set; }
+    public string? ParametersFileName { get; set; }
 
     public bool TryLoadParameters(string paramsFileName, bool shoWError = true)
     {
