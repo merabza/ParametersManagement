@@ -2,11 +2,11 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+        <PackageReference Include="Polly.Core" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference
-            Include="..\..\SystemTools\SystemTools.SystemToolsShared\SystemTools.SystemToolsShared.csproj" />
+        <ProjectReference Include="..\..\SystemTools\SystemTools.SystemToolsShared\SystemTools.SystemToolsShared.csproj" />
         <ProjectReference Include="..\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
     </ItemGroup>
 
