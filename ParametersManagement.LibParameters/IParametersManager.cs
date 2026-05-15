@@ -8,6 +8,6 @@ public interface IParametersManager
     IParameters Parameters { get; set; }
     string? ParametersFileName { get; }
 
-    ValueTask Save(IParameters parameters, string message, string? saveAsFilePath = null,
+    ValueTask<bool> Save(IParameters parameters, string message, string? saveAsFilePath = null,
         CancellationToken cancellationToken = default);
 }

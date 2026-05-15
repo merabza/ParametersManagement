@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -8,7 +7,7 @@ using SystemTools.SystemToolsShared;
 
 namespace ParametersManagement.LibParameters;
 
-public sealed class ParametersManager : IParametersManager
+public class ParametersManager : IParametersManager
 {
     //private readonly string? _encKey;
 
@@ -33,7 +32,7 @@ public sealed class ParametersManager : IParametersManager
 
     public IParameters Parameters { get; set; }
 
-    public async ValueTask Save(IParameters parameters, string? message, string? saveAsFilePath = null,
+    public async ValueTask<bool> Save(IParameters parameters, string? message, string? saveAsFilePath = null,
         CancellationToken cancellationToken = default)
     {
         if (!string.IsNullOrWhiteSpace(saveAsFilePath))
@@ -44,6 +43,7 @@ public sealed class ParametersManager : IParametersManager
         if (!parameters.CheckBeforeSave())
         {
             StShared.WriteWarningLine("Something wrong with data for save", true, null, true);
+            return false;
         }
 
         string paramsJsonText = JsonConvert.SerializeObject(parameters, Formatting.Indented);
@@ -64,7 +64,8 @@ public sealed class ParametersManager : IParametersManager
 
         if (string.IsNullOrWhiteSpace(filePathForSave))
         {
-            throw new Exception("filePathForSave is empty, cannot save");
+            StShared.WriteWarningLine("filePathForSave is empty, cannot save", true, null, true);
+            return false;
         }
 
         //შევინახოთ პარამეტრების ფაილი
@@ -75,9 +76,10 @@ public sealed class ParametersManager : IParametersManager
         Parameters = parameters;
         if (string.IsNullOrWhiteSpace(message))
         {
-            return;
+            return true;
         }
 
         StShared.WriteSuccessMessage(message);
+        return true;
     }
 }
