@@ -10,8 +10,6 @@ public sealed class ParametersLoader<T> where T : class, IParameters, new()
 {
     //private readonly string? _encKey;
 
-    // ReSharper disable once ConvertToPrimaryConstructor
-
     public IParameters? Par { get; private set; }
     public string? ParametersFileName { get; set; }
 

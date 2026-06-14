@@ -9,14 +9,10 @@ namespace ParametersManagement.LibParameters;
 
 public class ParametersManager : IParametersManager
 {
-    //private readonly string? _encKey;
 
-    // ReSharper disable once UnusedMember.Global
     public ParametersManager(IOptions<MainParametersManagerOptions> options)
-        //string? parametersFileName, IParameters parameters, string? encKey = null)
     {
         ParametersFileName = options.Value.ParametersFileName;
-        //_encKey = encKey;
         Parameters = options.Value.Par;
     }
 
@@ -24,7 +20,6 @@ public class ParametersManager : IParametersManager
     public ParametersManager(string? parametersFileName, IParameters parameters)
     {
         ParametersFileName = parametersFileName;
-        //_encKey = encKey;
         Parameters = parameters;
     }
 

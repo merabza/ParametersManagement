@@ -7,8 +7,8 @@ public sealed class FileStorages
     private readonly Dictionary<string, FileStorageData> _fileStorages;
 
     //public საჭიროა supportTools პროექტისათვის
-    // ReSharper disable once ConvertToPrimaryConstructor
     // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once ConvertToPrimaryConstructor
     public FileStorages(Dictionary<string, FileStorageData> fileStorages)
     {
         _fileStorages = fileStorages;

@@ -7,9 +7,9 @@ namespace ParametersManagement.LibDatabaseParameters;
 
 public sealed class DatabaseBackupParametersDomain : IParameters
 {
-    // ReSharper disable once ConvertToPrimaryConstructor
     //public გამოიყენება WebAgent-ში
     // ReSharper disable once MemberCanBePrivate.Global
+    // ReSharper disable once ConvertToPrimaryConstructor
     public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
         string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType)
     {
