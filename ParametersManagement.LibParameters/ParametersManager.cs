@@ -9,7 +9,6 @@ namespace ParametersManagement.LibParameters;
 
 public class ParametersManager : IParametersManager
 {
-
     public ParametersManager(IOptions<MainParametersManagerOptions> options)
     {
         ParametersFileName = options.Value.ParametersFileName;
