@@ -14,5 +14,4 @@
     <Project Path="ParametersManagement.LibDatabaseParameters/ParametersManagement.LibDatabaseParameters.csproj" />
     <Project Path="ParametersManagement.LibFileParameters/ParametersManagement.LibFileParameters.csproj" />
     <Project Path="ParametersManagement.LibParameters/ParametersManagement.LibParameters.csproj" />
-    <Project Path="ParametersManagement/ParametersManagement.csproj" />
 </Solution>
