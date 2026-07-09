@@ -4,8 +4,4 @@
         <PackageReference Include="Newtonsoft.Json" />
     </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\..\SystemTools\SystemTools.SystemToolsShared\SystemTools.SystemToolsShared.csproj" />
-    </ItemGroup>
-
 </Project>
