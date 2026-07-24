@@ -18,8 +18,11 @@ public sealed class SmartSchema : ItemData
         }
 
         //თავიდან ბოლო შექმნილები დავარეზერვოთ
-        List<DateTime> preserveDates = files.Select(s => s.FileDateTime).OrderByDescending(obd => obd)
-            .Take(LastPreserveCount < 1 ? 1 : LastPreserveCount).ToList();
+        List<DateTime> preserveDates =
+        [
+            .. files.Select(s => s.FileDateTime).OrderByDescending(obd => obd)
+                .Take(LastPreserveCount < 1 ? 1 : LastPreserveCount)
+        ];
 
         //დავადგინოთ რომელია ყველაზე პატარა პერიოდის შესაბამისი დეტალი
         EPeriodType minPeriodType = Details.Max(m => m.PeriodType);
@@ -48,13 +51,13 @@ public sealed class SmartSchema : ItemData
             preserveDates.AddRange(res);
         }
 
-        return preserveDates.Distinct().ToList();
+        return [.. preserveDates.Distinct()];
     }
 
     public List<BuFileInfo> GetFilesForDeleteBySchema(List<BuFileInfo> files)
     {
         List<DateTime> preserveDates = GetPreserveFileDates(files);
 
-        return files.Where(buFileInfo => !preserveDates.Contains(buFileInfo.FileDateTime)).ToList();
+        return [.. files.Where(buFileInfo => !preserveDates.Contains(buFileInfo.FileDateTime))];
     }
 }
