@@ -8,7 +8,7 @@ public sealed class FileStorages
 
     //public საჭიროა supportTools პროექტისათვის
     // ReSharper disable once MemberCanBePrivate.Global
-    // ReSharper disable once ConvertToPrimaryConstructor
+    
     public FileStorages(Dictionary<string, FileStorageData> fileStorages)
     {
         _fileStorages = fileStorages;

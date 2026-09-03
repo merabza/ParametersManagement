@@ -9,7 +9,7 @@ public sealed class DatabaseBackupParametersDomain : IParameters
 {
     //public გამოიყენება WebAgent-ში
     // ReSharper disable once MemberCanBePrivate.Global
-    // ReSharper disable once ConvertToPrimaryConstructor
+    
     public DatabaseBackupParametersDomain(string backupNamePrefix, string dateMask, string backupFileExtension,
         string backupNameMiddlePart, bool compress, bool verify, EBackupType backupType)
     {

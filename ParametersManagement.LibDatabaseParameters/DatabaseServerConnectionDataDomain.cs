@@ -6,7 +6,7 @@ namespace ParametersManagement.LibDatabaseParameters;
 
 public sealed class DatabaseServerConnectionDataDomain : ItemData
 {
-    // ReSharper disable once ConvertToPrimaryConstructor
+    
     public DatabaseServerConnectionDataDomain(EDatabaseProvider databaseServerProvider, string serverAddress,
         DbAuthSettingsBase dbAuthSettings, bool trustServerCertificate,
         Dictionary<string, DatabaseFoldersSet> databaseFoldersSets)

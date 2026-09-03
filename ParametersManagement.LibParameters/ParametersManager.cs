@@ -15,7 +15,7 @@ public class ParametersManager : IParametersManager
         Parameters = options.Value.Par;
     }
 
-    // ReSharper disable once ConvertToPrimaryConstructor
+    
     public ParametersManager(string? parametersFileName, IParameters parameters)
     {
         ParametersFileName = parametersFileName;

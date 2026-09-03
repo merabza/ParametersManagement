@@ -6,7 +6,7 @@ public sealed class DatabaseServerConnections
 {
     private readonly Dictionary<string, DatabaseServerConnectionData> _databaseServerConnections;
 
-    // ReSharper disable once ConvertToPrimaryConstructor
+    
     public DatabaseServerConnections(Dictionary<string, DatabaseServerConnectionData> databaseServerConnections)
     {
         _databaseServerConnections = databaseServerConnections;
