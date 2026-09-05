@@ -15,7 +15,6 @@ public class ParametersManager : IParametersManager
         Parameters = options.Value.Par;
     }
 
-    
     public ParametersManager(string? parametersFileName, IParameters parameters)
     {
         ParametersFileName = parametersFileName;
