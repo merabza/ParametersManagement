@@ -6,7 +6,6 @@ namespace ParametersManagement.LibDatabaseParameters;
 
 public sealed class DatabaseServerConnectionDataDomain : ItemData
 {
-    
     public DatabaseServerConnectionDataDomain(EDatabaseProvider databaseServerProvider, string serverAddress,
         DbAuthSettingsBase dbAuthSettings, bool trustServerCertificate,
         Dictionary<string, DatabaseFoldersSet> databaseFoldersSets)

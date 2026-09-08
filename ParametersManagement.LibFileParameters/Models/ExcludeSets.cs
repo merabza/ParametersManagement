@@ -6,7 +6,6 @@ public sealed class ExcludeSets
 {
     private readonly Dictionary<string, ExcludeSet> _excludeSet;
 
-    
     public ExcludeSets(Dictionary<string, ExcludeSet> excludeSet)
     {
         _excludeSet = excludeSet;

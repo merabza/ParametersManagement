@@ -7,7 +7,6 @@ public sealed class Archivers
 {
     private readonly Dictionary<string, ArchiverData> _archivers;
 
-    
     public Archivers(Dictionary<string, ArchiverData> archivers)
     {
         _archivers = archivers;

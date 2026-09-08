@@ -6,7 +6,6 @@ public sealed class SmartSchemas
 {
     private readonly Dictionary<string, SmartSchema> _smartSchemas;
 
-    
     public SmartSchemas(Dictionary<string, SmartSchema> smartSchemas)
     {
         _smartSchemas = smartSchemas;

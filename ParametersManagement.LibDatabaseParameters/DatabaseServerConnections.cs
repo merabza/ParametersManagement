@@ -6,7 +6,6 @@ public sealed class DatabaseServerConnections
 {
     private readonly Dictionary<string, DatabaseServerConnectionData> _databaseServerConnections;
 
-    
     public DatabaseServerConnections(Dictionary<string, DatabaseServerConnectionData> databaseServerConnections)
     {
         _databaseServerConnections = databaseServerConnections;
