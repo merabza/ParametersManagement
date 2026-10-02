@@ -10,6 +10,9 @@
     <Folder Name="/SystemTools/">
         <Project Path="../SystemTools/SystemTools.SystemToolsShared/SystemTools.SystemToolsShared.csproj" />
     </Folder>
+    <Folder Name="/Tests/">
+        <Project Path="ParametersManagement.LibParameters.Tests/ParametersManagement.LibParameters.Tests.csproj" />
+    </Folder>
     <Project Path="ParametersManagement.LibApiClientParameters/ParametersManagement.LibApiClientParameters.csproj" />
     <Project Path="ParametersManagement.LibDatabaseParameters/ParametersManagement.LibDatabaseParameters.csproj" />
     <Project Path="ParametersManagement.LibFileParameters/ParametersManagement.LibFileParameters.csproj" />

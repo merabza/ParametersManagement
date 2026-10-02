@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
@@ -9,6 +13,16 @@ namespace ParametersManagement.LibParameters;
 
 public class ParametersManager : IParametersManager
 {
+    //ბექაპის სახელში ჩასმული თარიღის ფორმატი, მაგალითად SupportTools.json.20261001-213015-123.bak
+    private const string BackupDateMask = "yyyyMMdd-HHmmss-fff";
+    private const string BackupExtension = ".bak";
+
+    //ფაილის რამდენი წინა ვერსია ინახება. უფრო ძველი ბექაპები იშლება
+    private const int MaxBackupFilesCount = 10;
+
+    //იგივე კოდირება, რასაც File.WriteAllText იყენებს: UTF-8 BOM-ის გარეშე
+    private static readonly UTF8Encoding Utf8NoBom = new(false, true);
+
     public ParametersManager(IOptions<MainParametersManagerOptions> options)
     {
         ParametersFileName = options.Value.ParametersFileName;
@@ -50,21 +64,14 @@ public class ParametersManager : IParametersManager
 
         string? filePathForSave = !string.IsNullOrWhiteSpace(saveAsFilePath) ? saveAsFilePath : ParametersFileName;
 
-        //მიმდინარე ფაილის შეცვლამდე უნდა მოხდეს ბექაპის დამახსოვრება
-        //დავადგინოთ შესანახი ფაილის სახელის მიხედვით არსებობს თუ არა ფაილი.
-        //თუ ფაილი არსებობს, მისი სახელის მიხედვით დაგენერირდეს bak ფაილის სახელი არსებული ფაილის სახელის გამოყენებით. უნდა დაემატოს თარიღი და გაფართოება .bak
-        //შევუცვალოთ სახელი არსებულ ფაილს დაგენერირებული ფაილის მიხედვით
-
         if (string.IsNullOrWhiteSpace(filePathForSave))
         {
             StShared.WriteWarningLine("filePathForSave is empty, cannot save", true, null, true);
             return false;
         }
 
-        //შევინახოთ პარამეტრების ფაილი
-        await File.WriteAllTextAsync(filePathForSave, paramsJsonText, cancellationToken);
-
-        //დავადგინოთ არსებობს თუ არა ძალიან ძველი bak ფაილები და წავშალოთ
+        //შევინახოთ პარამეტრების ფაილი. წინა ვერსია ბექაპად რჩება
+        await WriteFileWithBackup(filePathForSave, paramsJsonText, cancellationToken);
 
         Parameters = parameters;
         if (string.IsNullOrWhiteSpace(message))
@@ -74,5 +81,105 @@ public class ParametersManager : IParametersManager
 
         StShared.WriteSuccessMessage(message);
         return true;
+    }
+
+    private static async ValueTask WriteFileWithBackup(string filePath, string text,
+        CancellationToken cancellationToken)
+    {
+        bool fileExists = File.Exists(filePath);
+
+        //შიგთავსი არ შეცვლილა, ამიტომ ფაილი თავიდან აღარ იწერება. ერთი ოპერაცია ფაილს რამდენჯერმე ინახავს და
+        //ამის გარეშე ბექაპები მიმდინარე ფაილის ასლებით გაივსებოდა
+        if (fileExists && await File.ReadAllTextAsync(filePath, cancellationToken) == text)
+        {
+            return;
+        }
+
+        //ახალი შიგთავსი ჯერ იმავე ფოლდერის დროებით ფაილში იწერება და მერე ერთი ოპერაციით ანაცვლებს მთავარ ფაილს.
+        //ასე ჩაწერის შუაში შეწყვეტა მთავარ ფაილს ვერ დააზიანებს
+        string tempFilePath = $"{filePath}.{Guid.NewGuid():N}.tmp";
+        try
+        {
+            await WriteToDisk(tempFilePath, text, cancellationToken);
+
+            //მიმდინარე ფაილის შეცვლამდე მისი ასლი ბექაპად ინახება
+            if (fileExists)
+            {
+                File.Copy(filePath, GetBackupFilePath(filePath), true);
+            }
+
+            File.Move(tempFilePath, filePath, true);
+        }
+        finally
+        {
+            //შეცდომისას დროებითი ფაილი არ უნდა დარჩეს
+            if (File.Exists(tempFilePath))
+            {
+                File.Delete(tempFilePath);
+            }
+        }
+
+        if (fileExists)
+        {
+            DeleteOldBackupFiles(filePath);
+        }
+    }
+
+    //WriteThrough: მთავარი ფაილის ჩანაცვლებამდე მონაცემი დისკზე უნდა იყოს და არა მხოლოდ სისტემის ქეშში,
+    //რომ კვების გათიშვის შემდეგ ჩანაცვლებული ფაილი ცარიელი არ აღმოჩნდეს
+    private static async ValueTask WriteToDisk(string filePath, string text, CancellationToken cancellationToken)
+    {
+        // ReSharper disable once using
+        await using var stream = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None, 4096,
+            FileOptions.WriteThrough | FileOptions.Asynchronous);
+        await stream.WriteAsync(Utf8NoBom.GetBytes(text), cancellationToken);
+    }
+
+    private static string GetBackupFilePath(string filePath)
+    {
+        return $"{filePath}.{DateTime.Now.ToString(BackupDateMask, CultureInfo.InvariantCulture)}{BackupExtension}";
+    }
+
+    //იშლება მხოლოდ ამ კლასის შექმნილი ბექაპები, რომელთა სახელშიც ზუსტად BackupDateMask ფორმატის თარიღია.
+    //ხელით გაკეთებულ ასლებს სხვა სახელები აქვს და ისინი ხელუხლებელი რჩება
+    private static void DeleteOldBackupFiles(string filePath)
+    {
+        string fullFilePath = Path.GetFullPath(filePath);
+        //ფაილის სრულ გზას ფოლდერი ყოველთვის აქვს: null მხოლოდ დისკის ფესვისთვის ბრუნდება
+        string folderPath = Path.GetDirectoryName(fullFilePath)!;
+        string backupFileNamePrefix = $"{Path.GetFileName(fullFilePath)}.";
+
+        //თარიღის ფორმატის გამო სახელების დალაგება თარიღების დალაგებასაც ნიშნავს
+        foreach (string oldBackupFilePath in Directory
+                     .EnumerateFiles(folderPath, $"{backupFileNamePrefix}*{BackupExtension}")
+                     .Where(x => IsBackupFileName(Path.GetFileName(x), backupFileNamePrefix))
+                     .OrderByDescending(x => x, StringComparer.OrdinalIgnoreCase).Skip(MaxBackupFilesCount))
+        {
+            try
+            {
+                File.Delete(oldBackupFilePath);
+            }
+            catch (IOException e)
+            {
+                StShared.WriteWarningLine($"Old backup file {oldBackupFilePath} was not deleted: {e.Message}", true);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                StShared.WriteWarningLine($"Old backup file {oldBackupFilePath} was not deleted: {e.Message}", true);
+            }
+        }
+    }
+
+    private static bool IsBackupFileName(string fileName, string backupFileNamePrefix)
+    {
+        if (fileName.Length != backupFileNamePrefix.Length + BackupDateMask.Length + BackupExtension.Length ||
+            !fileName.StartsWith(backupFileNamePrefix, StringComparison.OrdinalIgnoreCase) ||
+            !fileName.EndsWith(BackupExtension, StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        return DateTime.TryParseExact(fileName.AsSpan(backupFileNamePrefix.Length, BackupDateMask.Length),
+            BackupDateMask, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
     }
 }
