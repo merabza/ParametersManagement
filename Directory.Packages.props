@@ -4,7 +4,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="DatabaseTools.DbTools" Version="1.0.9808.33396" />
+    <PackageVersion Include="DatabaseTools.DbTools" Version="1.0.9808.42613" />
     <PackageVersion Include="Polly.Core" Version="8.9.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="10.0.14" />
