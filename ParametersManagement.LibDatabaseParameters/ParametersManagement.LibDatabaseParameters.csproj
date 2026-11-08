@@ -3,7 +3,10 @@
     <ItemGroup>
         <ProjectReference Include="..\ParametersManagement.LibApiClientParameters\ParametersManagement.LibApiClientParameters.csproj" />
         <ProjectReference Include="..\ParametersManagement.LibParameters\ParametersManagement.LibParameters.csproj" />
-        <ProjectReference Include="..\..\DatabaseTools\DatabaseTools.DbTools\DatabaseTools.DbTools.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DatabaseTools.DbTools" />
     </ItemGroup>
 
 </Project>
