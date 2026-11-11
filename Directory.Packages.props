@@ -4,7 +4,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="DatabaseTools.DbTools" Version="1.0.9808.42613" />
+    <PackageVersion Include="DatabaseTools.DbTools" Version="1.0.9811.42431" />
     <PackageVersion Include="Polly.Core" Version="8.9.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
@@ -13,7 +13,7 @@
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="coverlet.collector" Version="10.1.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.11.0" />
-    <PackageVersion Include="SystemTools.SystemToolsShared" Version="1.0.9808.33287" />
+    <PackageVersion Include="SystemTools.SystemToolsShared" Version="1.0.9811.42356" />
     <PackageVersion Include="xunit" Version="2.9.3" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.1" />
   </ItemGroup>
