@@ -24,6 +24,10 @@ public sealed class DatabaseServerConnectionData : ItemData
 
     public bool Encrypt { get; set; }
 
+    //ბაზის სახელი არასავალდებულოა: ConnectionString-ის გენერატორი მას ConnectionString-ში სვამს. ბაზასთან მომუშავე
+    //ინსტრუმენტები ბაზის სახელს ისევ თვითონ აწვდიან
+    public string? DatabaseName { get; set; }
+
     //public DatabaseBackupParametersModel? FullDbBackupParameters { get; set; }
     public Dictionary<string, DatabaseFoldersSet>? DatabaseFoldersSets { get; set; } = [];
 
